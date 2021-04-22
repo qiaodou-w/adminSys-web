@@ -29,7 +29,7 @@ function mockXHR() {
 
   function XHR2ExpressReqWrap(respond) {
     return function(options) {
-      let result = null
+      let result
       if (respond instanceof Function) {
         const { body, type, url } = options
         // https://expressjs.com/en/4x/api.html#req
