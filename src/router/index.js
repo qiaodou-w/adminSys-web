@@ -51,7 +51,10 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '控制台', icon: 'dashboard' }
+      meta: {
+        title: '控制台',
+        icon: 'dashboard',
+        affix: true }
     }]
   },
 
@@ -163,6 +166,23 @@ export const constantRoutes = [
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
+
+export const asyncRoutes = [
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission',
+    meta: {
+      title: 'Permission',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+
+    ]
+  }]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
