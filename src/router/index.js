@@ -57,6 +57,21 @@ export const constantRoutes = [
         affix: true }
     }]
   },
+  {
+    path: '/setting',
+    component: Layout,
+    redirect: '/setting/adminList',
+    name: 'setting',
+    meta: { title: '系统设置', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'adminList',
+        name: 'adminList',
+        component: () => import('@/views/setting/'),
+        meta: { title: '账号管理', icon: 'table' }
+      }
+    ]
+  },
 
   {
     path: '/example',
