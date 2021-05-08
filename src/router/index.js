@@ -58,6 +58,19 @@ export const constantRoutes = [
     }]
   },
   {
+    path: '/mange',
+    component: Layout,
+    children: [{
+      path: 'dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/management/index'),
+      meta: {
+        title: '学生管理',
+        icon: 'dashboard'
+      }
+    }]
+  },
+  {
     path: '/setting',
     component: Layout,
     redirect: '/setting/adminList',
