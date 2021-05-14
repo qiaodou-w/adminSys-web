@@ -60,12 +60,21 @@ export const constantRoutes = [
   {
     path: '/mange',
     component: Layout,
+    meta: { title: '学生管理', icon: 'el-icon-s-help' },
     children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
+      path: 'studentsList',
+      name: 'studentsList',
       component: () => import('@/views/management/index'),
       meta: {
-        title: '学生管理',
+        title: '学生名单',
+        icon: 'dashboard'
+      }
+    }, {
+      path: 'uploadInfo',
+      name: 'uploadInfo',
+      component: () => import('@/views/management/index'),
+      meta: {
+        title: '打卡记录',
         icon: 'dashboard'
       }
     }]

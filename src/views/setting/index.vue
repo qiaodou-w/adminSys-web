@@ -102,15 +102,6 @@
       </div>
     </el-dialog>
 
-    <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
-      <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-        <el-table-column prop="key" label="Channel" />
-        <el-table-column prop="pv" label="Pv" />
-      </el-table>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogPvVisible = false">Confirm</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -136,14 +127,6 @@ export default {
   components: { Pagination },
   directives: { waves },
   filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'info',
-        deleted: 'danger'
-      }
-      return statusMap[status]
-    },
     typeFilter(type) {
       return calendarTypeKeyValue[type]
     }
@@ -163,8 +146,6 @@ export default {
         sort: '+id'
       },
       calendarTypeOptions,
-      sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
-      statusOptions: ['published', 'draft', 'deleted'],
       temp: {
         name: '',
         uuid: undefined,
@@ -179,8 +160,6 @@ export default {
         update: '编辑',
         create: '新建'
       },
-      dialogPvVisible: false,
-      pvData: [],
       rules: {
         name: [{ required: true, message: '必填', trigger: 'change' }],
         uuid: [{ required: true, message: '必填', trigger: 'change' }],
@@ -188,8 +167,7 @@ export default {
         userName: [{ required: true, message: '必填', trigger: 'change' }],
         role: [{ required: true, message: '必填', trigger: 'change' }],
         password: [{ required: true, message: '必填', trigger: 'change' }]
-      },
-      downloadLoading: false
+      }
     }
   },
   created() {
@@ -308,20 +286,6 @@ export default {
       })
       this.list.splice(index, 1)
     },
-    // handleDownload() {
-    //   this.downloadLoading = true
-    //   import('@/vendor/Export2Excel').then(excel => {
-    //     const tHeader = ['timestamp', 'title', 'type', 'importance', 'status']
-    //     const filterVal = ['timestamp', 'title', 'type', 'importance', 'status']
-    //     const data = this.formatJson(filterVal)
-    //     excel.export_json_to_excel({
-    //       header: tHeader,
-    //       data,
-    //       filename: 'table-list'
-    //     })
-    //     this.downloadLoading = false
-    //   })
-    // },
     formatJson(filterVal) {
       return this.list.map(v => filterVal.map(j => {
         if (j === 'timestamp') {
