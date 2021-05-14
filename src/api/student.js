@@ -27,7 +27,7 @@ export function update(data) {
 export function deleteStu(data) {
   return request({
     url: '/management/delete',
-    method: 'post',
+    method: 'delete',
     data
   })
 }

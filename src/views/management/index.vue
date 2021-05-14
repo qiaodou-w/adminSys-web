@@ -273,7 +273,7 @@ export default {
         type: 'success',
         duration: 2000
       })
-      this.list.splice(index, 1)
+      this.stuList.splice(index, 1)
     }
   }
 }
