@@ -172,6 +172,7 @@ export default {
   },
   created() {
     this.getList()
+    // this.init()
   },
   methods: {
     getList(params) {
@@ -220,12 +221,11 @@ export default {
     createData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          console.log(this.temp)
           addAdmin(this.temp).then((res) => {
             switch (res.msg) {
               case '添加成功': {
                 this.list.unshift(this.temp)
-                this.dialogFormVisible = false
+                // this.dialogFormVisible = false
                 this.$notify({
                   title: '成功',
                   message: res.msg,
@@ -235,6 +235,24 @@ export default {
                 break
               }
               case '统一认证码已存在': {
+                this.$notify({
+                  title: '失败',
+                  message: res.msg,
+                  type: 'error',
+                  duration: 2000
+                })
+                break
+              }
+              case '用户名已存在': {
+                this.$notify({
+                  title: '失败',
+                  message: res.msg,
+                  type: 'error',
+                  duration: 2000
+                })
+                break
+              }
+              default: {
                 this.$notify({
                   title: '失败',
                   message: res.msg,
@@ -298,6 +316,28 @@ export default {
     getSortClass: function(key) {
       const sort = this.listQuery.sort
       return sort === `+${key}` ? 'ascending' : 'descending'
+    },
+    init() {
+      const obj =
+        {
+          name: '管理员',
+          uuid: 1478527,
+          tel: 15002396496,
+          userName: 'admin',
+          role: 'admin',
+          password: '111111'
+        }
+      for (let i = 4; i < 80; i++) {
+        const { name, uuid, tel, userName, role, password } = obj
+        addAdmin({
+          name: name + i,
+          uuid: uuid + i,
+          tel: tel + i,
+          userName: userName + i,
+          role: role + i,
+          password
+        })
+      }
     }
   }
 }

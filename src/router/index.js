@@ -72,7 +72,7 @@ export const constantRoutes = [
     }, {
       path: 'uploadInfo',
       name: 'uploadInfo',
-      component: () => import('@/views/management/index'),
+      component: () => import('@/views/management/uploadInfo'),
       meta: {
         title: '打卡记录',
         icon: 'dashboard'
